@@ -45,7 +45,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Navigation */
 .navbar {
     backdrop-filter: blur(12px);
-    background-color: rgba(255, 255, 255, 0.85) !important;
+    background-color: rgba(0, 0, 0, 0.85) !important;
     box-shadow: var(--box-shadow);
     padding: 1.25rem 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -136,6 +136,7 @@ section {
 
 .card-body {
     padding: 2rem;
+    clolor: var(--primary-light);
 }
 
 .card-title {
@@ -455,7 +456,7 @@ section {
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 0.75rem;
-    color: var(--text-dark);
+    color: var(--primary-color: #9D4EDD);
 }
 
 .certificate-issuer {
