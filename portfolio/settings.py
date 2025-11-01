@@ -18,8 +18,7 @@ SECRET_KEY = 'django-insecure-cynan)$$cxd$-rzb)%$$)+n*m=-&3#=1)2z+o90*t5(8c%yj2-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["my-portfolio-gui4.onrender.com"]
 
 # Application definition
 INSTALLED_APPS = [
