@@ -1,5 +1,33 @@
 // Initialize GSAP and its plugins
 document.addEventListener('DOMContentLoaded', () => {
+    // Register plugins FIRST
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+    // DEFINE observerOptions BEFORE using it
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    // Create observer with DEFINED options
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        observer.observe(el);
+    });
+    
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        observer.observe(el);
+    });
+    
     gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
     // Custom cursor with smoother animation
@@ -129,98 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
         lastScrollTop = scrollTop;
     });
 
-    // GSAP Scroll Animations
-    const animateOnScroll = () => {
-        // Hero section animations
-        const heroElements = document.querySelectorAll('.hero .animate-on-scroll');
-        const heroTimeline = gsap.timeline({
-            defaults: {
-                ease: "expo.out",
-                duration: 0.8
-            }
-        });
 
-        // Animate hero elements sequentially
-        heroElements.forEach((element, index) => {
-            const delay = index * 0.15; // Reduced delay for smoother sequence
-            
-            if (element.classList.contains('reveal-from-left')) {
-                heroTimeline.from(element, {
-                    x: -50, // Reduced distance for smoother animation
-                    opacity: 0,
-                    delay: delay
-                }, index > 0 ? "-=0.3" : 0);
-            } else if (element.classList.contains('reveal-from-right')) {
-                heroTimeline.from(element, {
-                    x: 50, // Reduced distance for smoother animation
-                    opacity: 0,
-                    delay: delay
-                }, index > 0 ? "-=0.3" : 0);
-            } else {
-                heroTimeline.from(element, {
-                    y: 30, // Reduced distance for smoother animation
-                    opacity: 0,
-                    delay: delay
-                }, index > 0 ? "-=0.3" : 0);
-            }
-        });
-
-        // Initialize ScrollTrigger for hero section
-        ScrollTrigger.create({
-            trigger: ".hero",
-            start: "top center",
-            onEnter: () => heroTimeline.play(),
-            onLeaveBack: () => heroTimeline.reverse()
-        });
-
-        // Fade up animation for other elements
-        gsap.utils.toArray('.animate-on-scroll:not(.hero .animate-on-scroll)').forEach(element => {
-            gsap.from(element, {
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: element,
-                    start: "top bottom-=100",
-                    toggleActions: "play none none reverse"
-                }
-            });
-        });
-
-        // Reveal from left animation
-        gsap.utils.toArray('.reveal-from-left').forEach(element => {
-            gsap.from(element, {
-                x: -100,
-                opacity: 0,
-                duration: 1.2,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: element,
-                    start: "top bottom-=100",
-                    toggleActions: "play none none reverse"
-                }
-            });
-        });
-
-        // Reveal from right animation
-        gsap.utils.toArray('.reveal-from-right').forEach(element => {
-            gsap.from(element, {
-                x: 100,
-                opacity: 0,
-                duration: 1.2,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: element,
-                    start: "top bottom-=100",
-                    toggleActions: "play none none reverse"
-                }
-            });
-        });
-    };
-
-    // Initialize scroll animations
-    animateOnScroll();
 
     // Project card animations
     gsap.utils.toArray('.project-card').forEach((card, index) => {
