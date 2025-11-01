@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="section-projects">
+    <div class="container-fluid px-4">
+        <div class="section-header">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h1 class="section-title">Projects That Speak</h1>
+                    <p class="section-subtitle">Crafting digital experiences through clean code and thoughtful design.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-grid">
+            {% for project in projects %}
+            <div class="project-card">
+                {% if project.image %}
+                <div class="project-image-container">
+                    <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-image">
+                </div>
+                {% endif %}
+                <div class="project-content">
+                    <h3 class="project-title">{{ project.title }}</h3>
+                    <p class="project-description">{{ project.description }}</p>
+                    <div class="tech-stack">
+                        {% for tech in project.tech_list %}
+                        <span class="tech-badge">{{ tech }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="project-footer">
+                        <div class="project-links">
+                            {% if project.live_link %}
+                            <a href="{{ project.live_link }}" class="project-link" target="_blank" title="View Live Demo">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            {% endif %}
+                            {% if project.github_link %}
+                            <a href="{{ project.github_link }}" class="project-link" target="_blank" title="View Source Code">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Contact CTA Section -->
+    <section class="section-cta">
+        <div class="container-fluid px-4">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <h2 class="cta-title">Have a Project in Mind?</h2>
+                    <p class="cta-text">Let's collaborate and build something amazing together.</p>
+                    <a href="{% url 'contact' %}" class="btn btn-primary btn-lg">Get in Touch →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+{% endblock %}

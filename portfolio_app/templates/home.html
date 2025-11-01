@@ -1,0 +1,199 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container-fluid px-4">
+        <div class="row align-items-center">
+            <div class="col-lg-7 hero-content">
+                <div class="hero-name-tag animate-on-scroll delay-1">Design × Development</div>
+                <h1 class="animate-on-scroll reveal-from-left delay-2">Design That Matter,<br>Projects That Speak</h1>
+                <p class="animate-on-scroll delay-3">Full-stack developer specializing in building exceptional digital experiences. 
+                Focusing on creating responsive and user-friendly applications with clean code and 
+                modern design principles.</p>
+                <div class="hero-cta animate-on-scroll delay-4">
+                    <a href="{% url 'projects' %}" class="btn btn-primary btn-lg">View Projects</a>
+                    <a href="{% url 'contact' %}" class="btn btn-outline-light btn-lg">Get in Touch</a>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="hero-image animate-on-scroll reveal-from-right delay-2">
+                    <img src="{% static 'img/IMG_7103.jpg' %}" alt="Darsh Patel" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-5">
+        <h2 class="text-center mb-4">Skills</h2>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fab fa-python"></i> Python</h5>
+                        <p class="card-text">Core Python programming, data structures, and algorithms</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fab fa-html5"></i> HTML</h5>
+                        <p class="card-text">Modern HTML5 for structured and semantic web development</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fab fa-django"></i><i class="fas fa-cogs"></i> Django</h5>
+                        <p class="card-text">Web development with Django framework</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fab fa-flask"></i> Flask</h5>
+                        <p class="card-text">Lightweight web applications with Flask</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-database"></i> MySQL</h5>
+                        <p class="card-text">Database design and management with MySQL</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Section -->
+    <section id="work" class="section-work">
+        <div class="container-fluid px-4">
+            <div class="section-header">
+                <div class="row align-items-end">
+                    <div class="col-lg-6">
+                        <h2 class="section-title animate-on-scroll reveal-from-left">Selected Works</h2>
+                        <p class="section-subtitle animate-on-scroll reveal-from-left delay-1">A collection of projects that showcase my expertise in design and development.</p>
+                    </div>
+                    <div class="col-lg-6 text-lg-end">
+                        <a href="{% url 'projects' %}" class="btn btn-outline-light btn-lg animate-on-scroll reveal-from-right">View All Projects →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-grid animate-on-scroll delay-2">
+                {% for project in projects|slice:":4" %}
+                <div class="project-card">
+                    {% if project.image %}
+                    <div class="project-image-container">
+                        <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-image">
+                    </div>
+                    {% endif %}
+                    <div class="project-content">
+                        <h3 class="project-title">{{ project.title }}</h3>
+                        <p class="project-description">{{ project.description }}</p>
+                        <div class="tech-stack">
+                            {% for tech in project.tech_list %}
+                            <span class="tech-badge">{{ tech }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="project-footer">
+                            <div class="project-links">
+                                {% if project.live_url %}
+                                <a href="{{ project.live_url }}" class="project-link" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                {% endif %}
+                                {% if project.github_url %}
+                                <a href="{{ project.github_url }}" class="project-link" target="_blank">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certificates" class="section-certificates">
+        <div class="container-fluid px-4">
+            <div class="section-header">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h2 class="section-title">Certifications</h2>
+                        <p class="section-subtitle">Professional certifications and achievements that demonstrate my expertise.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="certificates-grid">
+                {% for cert in certificates %}
+                <div class="certificate-card">
+                    <div class="certificate-content">
+                        <i class="fas fa-certificate certificate-icon"></i>
+                        <h3 class="certificate-title">{{ cert.title }}</h3>
+                        <p class="certificate-issuer">{{ cert.issuer }}</p>
+                        <div class="certificate-date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>{{ cert.date_earned|date:"F Y" }}</span>
+                        </div>
+                        {% if cert.certificate_file %}
+                        <a href="{{ cert.certificate_file.url }}" class="certificate-link" target="_blank">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section class="section-resume">
+        <div class="container-fluid px-4">
+            <div class="resume-card">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <h2 class="resume-title">Interested in my experience?</h2>
+                        <p class="resume-text">View my complete background and experience.</p>
+                    </div>
+                    <div class="col-lg-4 text-lg-end">
+                        {% if resume %}
+                        <a href="{% url 'resume' %}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-file-download me-2"></i>Download Resume
+                        </a>
+                        {% else %}
+                        <p class="text-muted">Resume will be available soon.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA Section -->
+    <section class="section-cta">
+        <div class="container-fluid px-4">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <h2 class="cta-title">Let's Build Something<br>Great, Together</h2>
+                    <p class="cta-text">I'm always interested in hearing about new projects and opportunities.</p>
+                    <a href="{% url 'contact' %}" class="btn btn-primary btn-lg">Get in Touch →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
