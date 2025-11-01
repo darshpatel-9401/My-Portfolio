@@ -22,7 +22,7 @@ def home(request):
         'certificates': certificates,
         'resume': latest_resume,
     }
-    return render(request, 'home.html', context)
+    return render(request, 'index.html', context)
 
 def projects(request):
     projects = Project.objects.all().order_by('-created_at')
