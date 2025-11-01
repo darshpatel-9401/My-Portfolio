@@ -8,7 +8,7 @@ def prepare_project_data(projects):
         project.tech_list = [tech.strip() for tech in project.technologies.split(',')]
     return projects
 
-def home(request):
+def index(request):
     projects = Project.objects.all().order_by('-created_at')[:3]  # Show only 3 latest projects
     projects = prepare_project_data(projects)
     certificates = Certificate.objects.all()
