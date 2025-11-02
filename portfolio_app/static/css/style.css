@@ -468,7 +468,7 @@ section {
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 0.75rem;
-    color: var(--primary-color: #9D4EDD);
+    color: var(--primary-color);
 }
 
 .certificate-issuer {
