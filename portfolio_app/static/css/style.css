@@ -147,6 +147,8 @@ section {
 
 .card-text{
     color: var(--text-light);
+    margin-bottom: 0;
+    line-height: 1.6;
 }
 
 .card-title i {
