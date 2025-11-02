@@ -127,6 +127,7 @@ section {
     transition: all var(--transition-speed) ease;
     background: white;
     box-shadow: var(--box-shadow);
+    color: #FFF;
 }
 
 .card:hover {
