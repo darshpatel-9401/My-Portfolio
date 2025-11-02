@@ -9,6 +9,7 @@
     --text-dark: #FFFFFF;
     --text-light: #F5F5F5;
     --text-gray: #A0A0A0;
+    --bs-card-title-color: #FFF;
     --transition-speed: 0.4s;
     --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
     --box-shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.5);
@@ -144,7 +145,7 @@ section {
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
-    color: var(--text-light);
+    color: var(--bs-card-title-color);
 }
 
 .card-text{
