@@ -144,12 +144,6 @@ section {
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
-}
-
-.card-title h5 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
     color: var(--text-light);
 }
 
